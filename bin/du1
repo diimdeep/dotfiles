@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# disk usage with human sizes and minimal depth
+du -h --max-depth=1 $1

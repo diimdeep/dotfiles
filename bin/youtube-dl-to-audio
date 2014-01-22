@@ -1,0 +1,2 @@
+#!/bin/sh
+youtube-dl --max-quality -x $1

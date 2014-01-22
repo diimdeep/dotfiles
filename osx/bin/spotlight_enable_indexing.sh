@@ -1,0 +1,1 @@
+sudo mdutil -a -i on
