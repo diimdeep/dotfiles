@@ -1,0 +1,23 @@
+#!/usr/bin/env python
+
+# find an unused unprivileged TCP port
+
+#port=32768; while netstat -atn | grep -q :$port; do port=$(expr $port + 1); done; echo $port
+
+#lowerPort=32768
+#
+#while :; do
+#    for (( port = lowerPort ; port <= upperPort ; port++ )); do
+#        nc -l -p "$port" 2>/dev/null && break 2
+#    done
+#done
+#
+#echo $port
+
+import socket
+
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind(('', 0))
+addr = s.getsockname()
+print addr[1]
+s.close()

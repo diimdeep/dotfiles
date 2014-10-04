@@ -1,0 +1,6 @@
+#!/bin/bash
+
+PORT=$(getport)
+
+open "http://localhost:$PORT"
+python -m SimpleHTTPServer $PORT $0
