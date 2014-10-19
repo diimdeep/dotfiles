@@ -1,4 +1,4 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
 
 puts "Linking library ..."
 
@@ -9,19 +9,21 @@ links = [
 	"osx/etc/.htoprc",
 
 	# shell
-	"osx/etc/.bashrc",	
-	"osx/etc/.zshrc",		
-	"osx/logs/.bash_history",
+	"osx/etc/.bashrc",
+	"osx/etc/.bash_profile",
+	"osx/etc/.zshrc",
+	"osx/etc/.inputrc",
+	"osx/logs/.bash_eternal_history",
 	"osx/logs/.zsh_history",
-	
+
 	# git
 	"osx/etc/git/.gitconfig",
 	"etc/git/.gitattributes",
-	"etc/git/.gitignore"
+	"etc/git/.gitignore_global"
 ]
 
 links.each	do |link|
-	`ln -sFfv #{DOTFILES}/#{link} $HOME/`	
+	`ln -sFfv #{DOTFILES}/#{link} $HOME/`
 end
 
 `ln -sFfv #{DOTFILES}/etc/ssh $HOME/.ssh`

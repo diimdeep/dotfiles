@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+
+STPATH=`osascript -e 'tell application "System Events" to POSIX path of (file of process "Sublime Text" as alias)' | sed 's/ /\\ /g'`
+
+if [ "$STPATH" == "" ]; then
+	echo 'Path to Sublime Text app not found.' >&2
+elif [ "$DOTFILES" == "" ]; then
+	echo 'Can not find dotfiles.' >&2
+else
+	echo "Sublime Text found: $STPATH"
+	SSUBL="$STPATH/Contents/SharedSupport/bin/subl"
+	SUBL="$DOTFILES/osx/bin/subl"
+	echo "Linking $SSUBL to $SUBL"
+
+	ln -s "$SSUBL" "$SUBL"
+	chmod +x "$SUBL"
+fi

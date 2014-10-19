@@ -1,0 +1,97 @@
+#!/usr/bin/env sh
+
+function installThings() {
+
+	# brew cask
+	brew install caskroom/cask/brew-cask
+
+	brew cask install macports # problem on yosemite
+
+	brew cask install xquartz
+
+	# Apps
+	brew cask install android-file-transfer
+	brew cask install double-commander
+	brew cask install mucommander
+
+	## IDEs
+	brew cask install caskroom/versions/java6
+	brew cask install intellij-idea
+	brew cask install phpstorm
+	brew cask install pycharm
+	brew cask install webstorm
+	brew cask install android-studio
+	brew cask install appcode
+	brew cask install clion-eap
+	brew cask install zeroxdbe-eap
+	brew cask install paintcode
+	brew cask install processing
+
+	brew cask install sourcetree
+	brew cask install github
+	brew cask install cyberduck
+
+	brew cask install hopper-disassembler
+
+	brew cask install mongohub
+
+	# netlogo
+	# brew cask install wireshark
+	# brew cask install aquamacs
+	# brew cask install emacs
+	# brew cask install xamarin-studio
+	# brew cask install fritzing
+
+	brew cask install virtualbox
+	brew cask install vagrant
+
+	brew cask install wineskin-winery
+
+	brew cask install opera
+	brew cask install torbrowser
+	brew cask install yandex
+	#brew cask install firefox
+
+	brew cask install bittorrent-sync
+	brew cask install google-earth
+
+	brew cask install cd-to
+	brew cask install caffeine
+
+	brew cask install hugin
+	brew cask install vlc
+	#brew cask install xbmc
+	#brew cask install gqrx
+	#brew cask install gpgtools
+	#brew cask install coconutbattery
+	brew cask install battery-time-remaining # problem on yosemite
+
+	# Quick Look plugins [source][https://github.com/sindresorhus/quick-look-plugins]
+	brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
+
+	# Preference panes
+	## A Mac PreferencePane for managing services with launchd/launchctl. https://github.com/jimbojsb/launchrocket
+	brew tap jimbojsb/launchrocket
+	brew cask install launchrocket
+	## Default settings
+	brew cask install RCDefaultApp
+	## MongoDb
+	brew cask install mongodbpreferencepane
+
+}
+
+# Check for Homebrew
+if test ! $(which brew)
+then
+	echo "You should probably install Homebrew first http://mxcl.github.com/homebrew/"
+else
+	echo "Homebrew found."
+	read -p "Install formulas? (y/n) " -n 1
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		installThings
+		exit
+	else
+		exit
+	fi
+fi

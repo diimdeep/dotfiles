@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+function installThings() {
+	npm install --global pageres
+	npm install --global bower
+	npm install --global grunt-cli
+	npm install --global tldr
+	npm install --global torrent-mount
+
+	# functional-javascript-workshop
+	# peerflix
+	# shader-school
+	# timetip
+	# write-gooder
+}
+
+# Check for node.js & npm
+if test ! $(which npm)
+then
+	echo "You should probably install node.js first http://nodejs.org or 'brew install node'"
+else
+	echo "npm found."
+	read -p "Install packages? (y/n) " -n 1
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		installThings
+		exit
+	else
+		exit
+	fi
+fi

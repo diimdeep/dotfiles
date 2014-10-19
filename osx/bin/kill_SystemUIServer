@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# Restart the SystemUIServer
+killall -HUP SystemUIServer

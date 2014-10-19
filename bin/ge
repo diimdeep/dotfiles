@@ -1,21 +1,21 @@
 #!/bin/sh
 #
-# Quick shortcut to an editor.
+# Quick shortcut to an graphical editor.
 #
 # This means that as I travel back and forth between editors, hey, I don't have
 # to re-learn any arcane commands. Neat.
 #
 # USAGE:
 #
-#   $ e
+#   $ ge
 #   # => opens the current directory in your editor
 #
-#   $ e .
-#   $ e /usr/local
+#   $ ge .
+#   $ ge /usr/local
 #   # => opens the specified directory in your editor
 
 if [[ $# == 0 ]]; then
-  exec $EDITOR .
+  exec $GEDITOR .
 else
-  exec $EDITOR "$1"
+  exec $GEDITOR "$1"
 fi

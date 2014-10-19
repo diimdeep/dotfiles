@@ -1,0 +1,8 @@
+#!/bin/zsh
+
+# -a             show instance variable offsets
+# -A             show implementation addresses
+# -H             generate header files in current directory, or directory specified with -o
+# -o <dir>       output directory used for -H
+
+class-dump "$1" -a -A -H -o "$2"

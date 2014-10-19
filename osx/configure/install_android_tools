@@ -1,0 +1,23 @@
+#!/usr/bin/env sh
+
+function installThings() {
+	brew install android-sdk
+	brew install dex2jar
+	brew install apktool
+}
+
+# Check for Homebrew
+if test ! $(which brew)
+then
+	echo "You should probably install Homebrew first http://mxcl.github.com/homebrew/"
+else
+	echo "Homebrew found."
+	read -p "Install formulas? (y/n) " -n 1
+	echo
+	if [[ $REPLY =~ ^[Yy]$ ]]; then
+		installThings
+		exit
+	else
+		exit
+	fi
+fi

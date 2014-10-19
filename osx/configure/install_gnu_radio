@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+# Check for MacPorts
+if test ! $(which port)
+then
+	echo "You should probably install MacPorts first"
+else
+	echo "MacPorts found."
+	sudo port install gnuradio rtl-sdr gr-osmosdr gr-fosphor gr-baz gqrx;
+fi

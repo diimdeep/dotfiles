@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# a dirty command line wrapper using w3m to browse explainshell.com pages
+
+# browse the page
+w3m "http://explainshell.com/explain?cmd="`echo $@ | tr ' ' '+'}`

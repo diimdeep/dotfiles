@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+
+if test $(which rvm)
+then
+	echo "Found rvm."
+else
+	echo "Installing rvm..."
+	curl -sSL https://get.rvm.io | bash -s stable
+fi
+
+echo "Install ruby"
+rvm install ruby
+
+echo "Install rubygems"
+rvm install rubygems latest

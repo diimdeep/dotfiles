@@ -1,0 +1,16 @@
+#!/usr/bin/env sh
+
+# Installs cocoapods
+
+if test ! $(which pod)
+then
+	echo "Installing Cocoapods(pod)..."
+	if test $(which rvm)
+	then
+		echo "Found rvm, switching to system Ruby."
+		rvm use system
+	fi
+	sudo gem install cocoapods
+else
+	echo "Cocoapods(pod) already installed."
+fi

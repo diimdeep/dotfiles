@@ -1,7 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env sh
 
 # Sets reasonable OS X defaults.
-
 
 # TODO
 #	mouse/trackpad scrolling
@@ -9,9 +8,36 @@
 #	icons in Dock
 #	time display settings
 
+# Reset text attributes to normal + without clearing screen.
+alias Reset="tput sgr0"
+red='\033[0;31m'
+cecho() {
+  echo "${2}${1}"
+  Reset # Reset to normal.
+  return
+}
+
+echo ""
+cecho "##############################################" $red
+cecho "#   CAUTION: DO NOT BLINDLY RUN THIS SCRIPT" $red
+cecho "#      YOU WILL PROBABLY REGRET IT..." $red
+cecho "#############################################" $red
+echo ""
+read -p "Continue to run script?? (y/n) " -n 1
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]; then
+	echo ""
+else
+	exit
+fi
+
+
 
 # Ask for the administrator password upfront
 sudo -v
+
+# Build locate database (/var/db/locate.database)
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
 # Keep-alive: update existing `sudo` time stamp until has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
@@ -29,9 +55,6 @@ sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Aut
 # =============================================================================#
 # Login window
 # =============================================================================#
-
-# Display login window as: Name and password
-#sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true
 
 # Show shut down etc. buttons
 sudo defaults write /Library/Preferences/com.apple.loginwindow PowerOffDisabled -bool false
@@ -60,36 +83,30 @@ sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.serve
 # Set standby delay to 24 hours (default is 1 hour)
 sudo pmset -a standbydelay 86400
 
-# Menu bar: disable transparency
-defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
-
-# Menu bar: show remaining battery time (on pre-10.8); hide percentage
+# Menu bar: battery hide percentage
 defaults write com.apple.menuextra.battery ShowPercent -string "NO"
-defaults write com.apple.menuextra.battery ShowTime -string "YES"
 
 # Set highlight color to green
-defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
+#no key defaults write NSGlobalDomain AppleHighlightColor -string "0.764700 0.976500 0.568600"
 
 # Disable opening and closing window animations
 defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
 
 # Increase window resize speed for Cocoa applications
-defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
+#? defaults write NSGlobalDomain NSWindowResizeTime -float 0.001
 
 # Expand save panel by default
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 
 # Expand print panel by default
 defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint2 -bool true
 
 # Save to disk (not to iCloud) by default
 defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false
 
 # Automatically quit printer app once the print jobs complete
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
-
-# Disable the “Are you sure you want to open this application?” dialog
-defaults write com.apple.LaunchServices LSQuarantine -bool false
 
 # Disable automatic termination of inactive apps
 defaults write NSGlobalDomain NSDisableAutomaticTermination -bool true
@@ -103,9 +120,6 @@ sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo Hos
 
 # Restart automatically if the computer freezes
 systemsetup -setrestartfreeze on
-
-# Never go into computer sleep mode
-#systemsetup -setcomputersleep Off > /dev/null
 
 # Check for software updates daily, not just once per week
 defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
@@ -128,13 +142,10 @@ defaults -currentHost write NSGlobalDomain com.apple.trackpad.enableSecondaryCli
 # Disable “natural” (Lion-style) scrolling
 defaults write NSGlobalDomain com.apple.swipescrolldirection -bool false
 
-# Increase sound quality for Bluetooth headphones/headsets
-#defaults write com.apple.BluetoothAudioAgent "Apple Bitpool Min (editable)" -int 40
-
 # Enable full keyboard access for all controls
 # (e.g. enable Tab in modal dialogs)
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 3
-
+ 
 # Use scroll gesture with the Ctrl (^) modifier key to zoom
 defaults write com.apple.universalaccess closeViewScrollWheelToggle -bool true
 defaults write com.apple.universalaccess HIDScrollZoomModifierMask -int 262144
@@ -143,15 +154,17 @@ defaults write com.apple.universalaccess closeViewZoomFollowsFocus -bool true
 
 # Disable press-and-hold for keys in favor of key repeat
 defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false
+#!?
 
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 0
+#!?
 
 # Set the timezone; see `systemsetup -listtimezones` for other values
 systemsetup -settimezone "Europe/Moscow" > /dev/null
 
-# Disable auto-correct
-#defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+# Turn off keyboard illumination when computer is not used for 5 minutes
+defaults write com.apple.BezelServices kDimTime -int 300
 
 # =============================================================================#
 # Screen                                                                       #
@@ -221,9 +234,6 @@ defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 
-# Enable spring loading for directories
-defaults write NSGlobalDomain com.apple.springing.enabled -bool true
-
 # Remove the spring loading delay for directories
 defaults write NSGlobalDomain com.apple.springing.delay -float 0
 
@@ -287,12 +297,6 @@ defaults write com.apple.Dock orientation -string "left"
 # Set the icon size of Dock items to 36 pixels
 defaults write com.apple.dock tilesize -int 36
 
-# Enable spring loading for all Dock items
-defaults write com.apple.dock enable-spring-load-actions-on-all-items -bool true
-
-# Show indicator lights for open applications in the Dock
-defaults write com.apple.dock show-process-indicators -bool true
-
 # Make Dock icons of hidden applications translucent
 defaults write com.apple.dock showhidden -bool true
 
@@ -301,18 +305,21 @@ defaults write com.apple.dock showhidden -bool true
 # =============================================================================#
 
 # Speed up Mission Control animations
-defaults write com.apple.dock expose-animation-duration -float 0.1
+defaults write com.apple.dock expose-animation-duration -float 0.14
+
+# App Exposé
+defaults write com.apple.dock showAppExposeGestureEnabled -bool true
 
 # Don’t group windows by application in Mission Control
 # (i.e. use the old Exposé behavior instead)
-#defaults write com.apple.dock expose-group-by-app -bool false
+#? defaults write com.apple.dock expose-group-by-app -bool false
 
 # =============================================================================#
 # Launchpad                                                                    #
 # =============================================================================#
 
 # Reset Launchpad
-find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
+#? find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 
 # =============================================================================#
 # Dashboard                                                                    #
@@ -321,11 +328,11 @@ find ~/Library/Application\ Support/Dock -name "*.db" -maxdepth 1 -delete
 # Enable Dashboard dev mode (allows keeping widgets on the desktop)
 #defaults write com.apple.dashboard devmode -bool true
 
-# Disable Dashboard
-defaults write com.apple.dashboard mcx-disabled -boolean YES
+# Disable Dashboard (by default)
+# defaults write com.apple.dashboard mcx-disabled -boolean YES
 
 # Don’t show Dashboard as a Space
-defaults write com.apple.dock dashboard-in-overlay -bool true
+# defaults write com.apple.dock dashboard-in-overlay -bool true
 
 # =============================================================================#
 # Safari & WebKit                                                              #
@@ -338,16 +345,16 @@ defaults write com.apple.Safari HomePage -string "about:blank"
 defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
 
 # Allow hitting the Backspace key to go to the previous page in history
-defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
+# defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2BackspaceKeyNavigationEnabled -bool true
 
 # Hide Safari’s bookmarks bar by default
 defaults write com.apple.Safari ShowFavoritesBar -bool false
 
 # Hide Safari’s sidebar in Top Sites
-defaults write com.apple.Safari ShowSidebarInTopSites -bool false
+# defaults write com.apple.Safari ShowSidebarInTopSites -bool false
 
 # Disable Safari’s thumbnail cache for History and Top Sites
-defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+# defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
 
 # Enable Safari’s debug menu
 defaults write com.apple.Safari IncludeInternalDebugMenu -bool true
@@ -366,6 +373,13 @@ defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebK
 # Add a context menu item for showing the Web Inspector in web views
 defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
 
+###############################################################################
+# Mail
+###############################################################################
+
+# Setting email addresses to copy as 'foo@example.com' instead of 'Foo Bar <foo@example.com>' in Mail.app
+# defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
+
 # =============================================================================#
 # iTunes                                                                       #
 # =============================================================================#
@@ -375,7 +389,8 @@ defaults write com.apple.iTunes AutomaticDeviceBackupsDisabled -bool true
 defaults write com.apple.iTunes DeviceBackupsDisabled -bool true
 
 # song Dock alarm
-defaults write com.apple.dock itunes-notifications -bool TRUE;killall Dock
+defaults write com.apple.dock itunes-notifications -bool TRUE
+killall Dock
 # to disable
 # defaults delete com.apple.dock itunes-notifications
 # defaults delete com.apple.dock notification-always-show-image
@@ -384,34 +399,37 @@ defaults write com.apple.dock itunes-notifications -bool TRUE;killall Dock
 # Spotlight                                                                    #
 # =============================================================================#
 
+# Hide the Spotlight icon
+sudo chmod 600 /System/Library/CoreServices/Search.bundle/Contents/MacOS/Search
+
 # Disable Spotlight indexing for any volume that gets mounted and has not yet
 # been indexed before.
 # Use `sudo mdutil -i off "/Volumes/foo"` to stop indexing any volume.
-sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
+# sudo defaults write /.Spotlight-V100/VolumeConfiguration Exclusions -array "/Volumes"
 # Change indexing order and disable some file types
-defaults write com.apple.spotlight orderedItems -array \
-	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
-	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
-	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
-	'{"enabled" = 1;"name" = "PDF";}' \
-	'{"enabled" = 0;"name" = "FONTS";}' \
-	'{"enabled" = 1;"name" = "DOCUMENTS";}' \
-	'{"enabled" = 0;"name" = "MESSAGES";}' \
-	'{"enabled" = 0;"name" = "CONTACT";}' \
-	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
-	'{"enabled" = 0;"name" = "IMAGES";}' \
-	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
-	'{"enabled" = 0;"name" = "MUSIC";}' \
-	'{"enabled" = 0;"name" = "MOVIES";}' \
-	'{"enabled" = 1;"name" = "PRESENTATIONS";}' \
-	'{"enabled" = 1;"name" = "SPREADSHEETS";}' \
-	'{"enabled" = 1;"name" = "SOURCE";}'
+#defaults write com.apple.spotlight orderedItems -array \
+#	'{"enabled" = 1;"name" = "APPLICATIONS";}' \
+#	'{"enabled" = 1;"name" = "SYSTEM_PREFS";}' \
+#	'{"enabled" = 1;"name" = "DIRECTORIES";}' \
+#	'{"enabled" = 1;"name" = "PDF";}' \
+#	'{"enabled" = 0;"name" = "FONTS";}' \
+#	'{"enabled" = 1;"name" = "DOCUMENTS";}' \
+#	'{"enabled" = 0;"name" = "MESSAGES";}' \
+#	'{"enabled" = 0;"name" = "CONTACT";}' \
+#	'{"enabled" = 0;"name" = "EVENT_TODO";}' \
+#	'{"enabled" = 0;"name" = "IMAGES";}' \
+#	'{"enabled" = 0;"name" = "BOOKMARKS";}' \
+#	'{"enabled" = 0;"name" = "MUSIC";}' \
+#	'{"enabled" = 0;"name" = "MOVIES";}' \
+#	'{"enabled" = 1;"name" = "PRESENTATIONS";}' \
+#	'{"enabled" = 1;"name" = "SPREADSHEETS";}' \
+#	'{"enabled" = 1;"name" = "SOURCE";}'
 # Load new settings before rebuilding the index
-killall mds > /dev/null 2>&1
+#killall mds > /dev/null 2>&1
 # Make sure indexing is enabled for the main volume
-sudo mdutil -i on / > /dev/null
+#sudo mdutil -i on / > /dev/null
 # Rebuild the index from scratch
-sudo mdutil -E / > /dev/null
+#sudo mdutil -E / > /dev/null
 
 
 # =============================================================================#
@@ -430,7 +448,12 @@ defaults write com.apple.addressbook ABShowDebugMenu -bool true
 
 # Disable Notification center
 #sudo defaults write /System/Library/LaunchAgents/com.apple.notificationcenterui KeepAlive -bool false
-launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+#launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
+# Enable  Notification center
+#sudo defaults write /System/Library/LaunchAgents/com.apple.notificationcenterui.plist KeepAlive -bool true
+#sudo chmod 644 /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+#launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist
+
 
 # Enable the debug menu in iCal (pre-10.8)
 defaults write com.apple.iCal IncludeDebugMenu -bool true
@@ -473,6 +496,18 @@ defaults write com.apple.appstore WebKitDeveloperExtras -bool true
 # Enable Debug Menu in the Mac App Store
 defaults write com.apple.appstore ShowDebugMenu -bool true
 
+###############################################################################
+# Terminal
+###############################################################################
+
+# Enabling UTF-8 ONLY in Terminal.app and setting the Pro theme by default
+defaults write com.apple.terminal StringEncodings -array 4
+defaults write com.apple.Terminal "Default Window Settings" -string "Pro"
+defaults write com.apple.Terminal "Startup Window Settings" -string "Pro"
+
+# New tabs open with Default Working Directory
+defaults write com.apple.Terminal NewTabWorkingDirectoryBehavior -bool true
+
 # =============================================================================#
 # iTerm 2                                                                      #
 # =============================================================================#
@@ -485,8 +520,11 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # Kill affected applications                                                   #
 # =============================================================================#
 
+echo "Almost complete, no we need to shutdown affected applications.. "
+read -p "press any key." -n 1
+
 for app in "Address Book" "Calendar" "Contacts" "Dashboard" "Dock" "Finder" \
-	"Mail" "Safari" "SystemUIServer" "Terminal" "iCal" "iTunes"; do	
+	"Mail" "Safari" "SystemUIServer" "Terminal" "iCal" "iTunes"; do
 	killall "$app" > /dev/null 2>&1
 done
 echo "Done. Note that some of these changes require a logout/restart to take effect."

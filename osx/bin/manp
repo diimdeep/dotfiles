@@ -1,0 +1,9 @@
+#!/bin/bash
+# Open man page in Preview.app
+
+if [ $# -eq 1 ]
+then
+	man -t $1 | open -f -a Preview
+else
+	echo 'Specify man page'
+fi

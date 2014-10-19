@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+# Installs some usefull things using Homebrew
+
+function installBrew() {
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+
+installBrew

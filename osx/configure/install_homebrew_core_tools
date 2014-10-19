@@ -1,10 +1,11 @@
-#!/bin/sh
-#
+#!/usr/bin/env sh
+
 # Installs some usefull things using Homebrew
 
-function installBrew() {
-	ruby -e "$(curl -fsSL https://raw.github.com/Homebrew/homebrew/go/install)"
-}
+# a = brew('list').replace('\t', '').replace('\n', ' ').split()
+# b = str(cat('/Users/wolf/.dotfiles/osx/configure/install_homebrew_core_tools.sh')).split()
+# for i in a:
+#     print str(i) in b, str(i)
 
 function installThings() {
 	# Make sure we’re using the latest Homebrew
@@ -18,37 +19,49 @@ function installThings() {
 	brew install gdbm --universal
 	brew install sqlite --universal
 	brew install libsndfile
-	
-	# first install Git
+
 	brew install git
 
 	brew install zsh tmux
+	brew install fish
+	brew install heroku-toolbelt
 
-	# Generic Colouriser
+	brew install smlnj
+	brew install rust
+	brew install node
+	brew install go
+
+	brew install osxfuse
+	brew install ntfs-3g
+
+	brew install emacs
+	brew install ncdu
+	brew install dfc
+	brew install z
+	brew install trash
+	brew install submarine
+	brew install ranger
+	brew install pstree
+	berw install media-info
+
+	brew install mitmproxy
+
+	brew install binutils
+
+	brew install pv
+	brew install ninja
+	brew install xctool
+
+	brew install gh
+	brew install mongodb
+
+	brew tap telemachus/homebrew-desc && brew install brew-desc
+
 	brew install grc
-		
+
 	brew install appledoc
 
-	# Android
-	brew install android-sdk
-	brew install dex2jar
-	brew install apktool
-
-	# install Databases
-	brew install mysql postgresql redis 
-
-	# Python
-	brew install python --framework --universal
-
-	brew install node
-	
-	# install PHP
-	brew tap josegonzalez/php
-	brew tap homebrew/dupes
-	brew install php54 --with-mysql --with-pgsql
-	brew install phpmyadmin
-
-	# Install Web tools
+	# Web tools
 	brew install wget --enable-iri
 	brew install curl aria2 w3m
 	brew install bmon
@@ -56,9 +69,13 @@ function installThings() {
 	brew install iftop
 	brew install nmap
 
-	# Install GNU core utilities (those that come with OS X are outdated)
+	## combines ping and traceroute
+	brew install mtr --no-gtk
+
+	# GNU utilities (those that come with OS X are outdated)
 	brew install coreutils
-	
+	brew install binutils
+
 	brew install ffmpeg
 
 	# lightweight and flexible command-line JSON processor.
@@ -72,15 +89,17 @@ function installThings() {
 	brew install ack
 	brew install exiv2
 	brew install imagemagick
-	brew install webkit2png
 	brew install valgrind
 	brew install class-dump
 	brew install testdisk
+	brew install duti
+	brew install https://raw.githubusercontent.com/diimdeep/OSXey/master/osxey.rb
 
 	brew install youtube-dl
 
 	brew install afsctool
-	
+	brew install apg
+
 	# Remove outdated versions from the cellar
 	brew cleanup
 }
@@ -89,17 +108,9 @@ function installThings() {
 if test ! $(which brew)
 then
 	echo "You should probably install Homebrew first http://mxcl.github.com/homebrew/"
-	read -p "Do you want install it? (y/n) " -n 1
-	echo
-	if [[ $REPLY =~ ^[Yy]$ ]]; then
-		installBrew
-		exit
-	else
-		exit
-	fi
 else
 	echo "Homebrew found."
-	read -p "Do you want install something interesting? (y/n) " -n 1
+	read -p "Install formulas? (y/n) " -n 1
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		installThings

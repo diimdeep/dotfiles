@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+open -a "Google Chrome" --args --user-data-dir="${CHROMEPROFILEPATH}"
