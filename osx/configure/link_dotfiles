@@ -13,6 +13,7 @@ links = [
 	"osx/etc/.bash_profile",
 	"osx/etc/.zshrc",
 	"osx/etc/.inputrc",
+	"osx/etc/.z",
 	"osx/logs/.bash_eternal_history",
 	"osx/logs/.zsh_history",
 
@@ -27,3 +28,6 @@ links.each	do |link|
 end
 
 `ln -sFfv #{DOTFILES}/etc/ssh $HOME/.ssh`
+
+`mkdir -p $HOME/.config/fish/`
+`ln -sFfv #{DOTFILES}/osx/etc/config/fish/config.fish $HOME/.config/fish/`

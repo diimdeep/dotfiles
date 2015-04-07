@@ -1,7 +1,7 @@
 #!/usr/bin/env sh
 
 function installThings() {
-	npm install --global pageres
+	npm install --global pageres # screenshoting
 	npm install --global bower
 	npm install --global grunt-cli
 	npm install --global tldr

@@ -1,0 +1,55 @@
+tmux
+
+ranger      # visual file manager
+treelive    #
+lt          # ls last 10 modified files
+ll          # better ls -l
+fname       # find file with name
+mcd         # mkdir && cd
+
+
+du1         # size of 
+ncdu        # disk usage
+dfc         # display file system space usage using graphs and colors
+
+pstree      # show processes
+fk          # kill process
+fp          # find and list processes
+psgrep      # find process
+
+mach        # displays the basic information about the system
+
+trash       #?
+mediainfo   #?
+
+z           #?
+hi 
+
+cdf         # open the Finder directory in the terminal
+f           # open in Finder
+
+xc          # XCode
+alpha       # ImageAlpha
+
+manp        # open man page in Preview.app
+
+als         # alias last and save
+
+calculate_hash  # 
+es              # Explainshell.com 
+es2
+
+diffd           # 
+
+gencmake    #
+http_headers
+python_packages_list
+
+mitmproxy # a man-in-the-middle proxy.  Intercept, modify, replay and save HTTP/S traffic
+
+# Git
+git-wtf     #
+
+# SVN
+svn-early_history_of_file   #
+svn-latest_history_of_file  #

@@ -31,8 +31,8 @@ function installThings() {
 	brew install node
 	brew install go
 
-	brew install osxfuse
-	brew install ntfs-3g
+	#brew install osxfuse
+	#brew install ntfs-3g
 
 	brew install emacs
 	brew install ncdu
@@ -46,23 +46,21 @@ function installThings() {
 
 	brew install mitmproxy
 
-	brew install binutils
-
 	brew install pv
 	brew install ninja
 	brew install xctool
 
 	brew install gh
 	brew install mongodb
+	brew install postgresql
+	#pgcl
 
-	brew tap telemachus/homebrew-desc && brew install brew-desc
+	brew tap telemachus/homebrew-desc
 
 	brew install grc
 
-	brew install appledoc
-
 	# Web tools
-	brew install wget --enable-iri
+	brew install wget --with-iri
 	brew install curl aria2 w3m
 	brew install bmon
 	brew install siege
@@ -100,6 +98,10 @@ function installThings() {
 	brew install afsctool
 	brew install apg
 
+	brew install mp3check
+	brew install mp3val
+	brew install mpck
+
 	# Remove outdated versions from the cellar
 	brew cleanup
 }
@@ -110,7 +112,7 @@ then
 	echo "You should probably install Homebrew first http://mxcl.github.com/homebrew/"
 else
 	echo "Homebrew found."
-	read -p "Install formulas? (y/n) " -n 1
+	read -p "Install brew formulas? (y/n) " -n 1
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		installThings

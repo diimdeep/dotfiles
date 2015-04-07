@@ -1,0 +1,20 @@
+#!/usr/bin/python2.6
+
+from LaunchServices import LSSetDefaultRoleHandlerForContentType, kLSRolesViewer, LSSetDefaultHandlerForURLScheme
+from CoreFoundation import CFPreferencesCopyApplicationList, kCFPreferencesCurrentUser, kCFPreferencesAnyHost, CFPreferencesSetAppValue, CFPreferencesAppSynchronize
+
+applicationBundleIdentifier =  "com.cocoatech.PathFinder" # works nicely
+
+#"info.filesmanager.Files" - dont work
+#"com.panic.Transmit" - dont work
+#"com.binarynights.forklift2" - dont work
+#"com.mucommander.muCommander" - hangs
+
+LSSetDefaultRoleHandlerForContentType("public.folder", kLSRolesViewer, applicationBundleIdentifier)
+LSSetDefaultHandlerForURLScheme("file:///", applicationBundleIdentifier)
+
+applicationIDs = CFPreferencesCopyApplicationList(kCFPreferencesCurrentUser, kCFPreferencesAnyHost)
+for app_id in applicationIDs:
+	CFPreferencesSetAppValue("NSFileViewer", applicationBundleIdentifier, app_id);
+	CFPreferencesAppSynchronize(app_id);
+

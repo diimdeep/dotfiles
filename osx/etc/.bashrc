@@ -79,7 +79,7 @@ export PATH="$(brew --prefix)/sbin:$PATH"
 PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 # Additionally, you can access their man pages with normal names if you add
 # the "gnuman" directory to your MANPATH from your bashrc as well:
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
 
 # GRC loading
 source "$(brew --prefix)/etc/grc.bashrc"
@@ -157,3 +157,5 @@ CHROMEPROFILEPATH="$DOTFILES/osx/etc/GoogleChrome"; export CHROMEPROFILEPATH
 
 complete -C aws_completer aws
 
+
+export GOPATH=~/Documents/Projects/Go

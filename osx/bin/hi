@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+history | tail -20

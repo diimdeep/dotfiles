@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# removes lines from $1 if they appear in $2
+grep -F -x -v -f $2 $1

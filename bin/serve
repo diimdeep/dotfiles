@@ -3,4 +3,4 @@
 PORT=$(getport)
 
 open "http://localhost:$PORT"
-python -m SimpleHTTPServer $PORT $0
+python2 -m SimpleHTTPServer $PORT $0

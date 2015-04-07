@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# ls but show last 10 modified
+ls -ltrsa "$@" | tail

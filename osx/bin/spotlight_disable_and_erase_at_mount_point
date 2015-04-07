@@ -1,0 +1,2 @@
+#!/bin/sh
+sudo mdutil -d -E $1

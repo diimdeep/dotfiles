@@ -1,0 +1,5 @@
+#!/usr/bin/python2.6
+
+# Set Sublime Text 3 as the default editor
+from LaunchServices import LSSetDefaultRoleHandlerForContentType, kLSRolesAll
+LSSetDefaultRoleHandlerForContentType("public.plain-text", kLSRolesAll, "com.sublimetext.3")

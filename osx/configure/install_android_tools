@@ -2,6 +2,7 @@
 
 function installThings() {
 	brew install android-sdk
+	android update sdk --no-ui --filter 'platform-tools'
 	brew install dex2jar
 	brew install apktool
 }

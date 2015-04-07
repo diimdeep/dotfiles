@@ -1,0 +1,3 @@
+#!/bin/bash
+PORT=$(getport)
+ipython3 notebook --pylab inline --port $PORT --notebook-dir=$1

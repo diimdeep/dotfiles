@@ -15,22 +15,6 @@ hh() {
     #rm "$commandfile"
 }
 
-function python_packages_list() { pip freeze; }
-
-function hi() { history | tail -20; }
-
-# ls but show last 10 modified
-function lt() { ls -ltrsa "$@" | tail; }
-
-function psgrep() { ps axu | grep -v grep | grep "$@" -i --color=auto; }
-
-function fname() { find . -iname "*$@*"; }
-
-# removes lines from $1 if they appear in $2
-function remove_lines_from() { grep -F -x -v -f $2 $1; }
-
-function mcd() { mkdir $1 && cd $1; }
-
 update() {
 	local brew="brew update; brew upgrade;"
 	#local gem="gem update;"
@@ -44,27 +28,8 @@ cleanup() {
 	brew cleanup -s
 }
 
-
-# open the Finder directory in the terminal
-# source http://apple.stackexchange.com/questions/12161/os-x-terminal-must-have-utilities
-cdf() {
-    target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
-    if [ "$target" != "" ]; then
-        cd "$target"; pwd
-    else
-        echo 'No Finder window found' >&2
-    fi
-}
-
-
 # add `username  ALL = NOPASSWD: /usr/local/bin/htop` to /etc/sudoers using `visudo` to bypass password
 function htop() { sudo htop; }
-
-function f() { open -a Finder $@; }
-function alpha() { open -a ImageAlpha $@; }
-function xc() { open -a Xcode $@; }
-
-
 
 # ll function formats the ls -l output better
 function ll ()
@@ -113,11 +78,6 @@ als() {
 	fi
 }
 
-# source: http://brettterpstra.com/2009/11/14/fk-a-useful-bash-function/
-# find and list processes matching a case-insensitive partial-match string
-fp () {
-		ps Ao pid,comm|awk '{match($0,/[^\/]+$/); print substr($0,RSTART,RLENGTH)": "$1}'|grep -i $1|grep -v grep
-}
 
 fk () { # build menu to kill process
     IFS=$'\n'
@@ -156,15 +116,3 @@ function _complete_app_alias()
 complete -o bashdefault -o dirnames -o filenames -o default -o nospace -F _complete_app_alias sublp subp xc alpha || \
 complete -o default -o dirnames -o filenames -o nospace -F _complete_app_alias sublp subp esp xc tp alpha byword mmdc
 
-# colors in manual pages
-man() {
-    env \
-    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-    LESS_TERMCAP_md=$(printf "\e[1;31m") \
-    LESS_TERMCAP_me=$(printf "\e[0m") \
-    LESS_TERMCAP_se=$(printf "\e[0m") \
-    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-    LESS_TERMCAP_ue=$(printf "\e[0m") \
-    LESS_TERMCAP_us=$(printf "\e[1;32m") \
-    man "$@"
-}

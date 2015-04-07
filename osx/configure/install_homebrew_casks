@@ -5,16 +5,17 @@ function installThings() {
 	# brew cask
 	brew install caskroom/cask/brew-cask
 
+	# System
 	brew cask install macports # problem on yosemite
-
 	brew cask install xquartz
+	brew cask install wineskin-winery
 
-	# Apps
+	# File
 	brew cask install android-file-transfer
 	brew cask install double-commander
 	brew cask install mucommander
 
-	## IDEs
+	# IDEs
 	brew cask install caskroom/versions/java6
 	brew cask install intellij-idea
 	brew cask install phpstorm
@@ -23,17 +24,16 @@ function installThings() {
 	brew cask install android-studio
 	brew cask install appcode
 	brew cask install clion-eap
-	brew cask install zeroxdbe-eap
+	brew cask install 0xdbe-eap
 	brew cask install paintcode
 	brew cask install processing
 
+	# Dev
 	brew cask install sourcetree
 	brew cask install github
 	brew cask install cyberduck
-
 	brew cask install hopper-disassembler
-
-	brew cask install mongohub
+	brew cask install jeromelebel-mongohub
 
 	# netlogo
 	# brew cask install wireshark
@@ -42,32 +42,39 @@ function installThings() {
 	# brew cask install xamarin-studio
 	# brew cask install fritzing
 
+	# Tools
+	brew cask install flux
+	brew cask install cd-to
+	brew cask install caffeine
+	brew cask install battery-time-remaining
+
+	# Virtualization
 	brew cask install virtualbox
 	brew cask install vagrant
 
-	brew cask install wineskin-winery
-
+	# Web
 	brew cask install opera
 	brew cask install torbrowser
 	brew cask install yandex
-	#brew cask install firefox
-
+	brew cask install firefox
+	brew cask install google-chrome
 	brew cask install bittorrent-sync
 	brew cask install google-earth
+	brew cask install google-hangouts
 
-	brew cask install cd-to
-	brew cask install caffeine
-
+	# Media
 	brew cask install hugin
 	brew cask install vlc
+	brew cask install kid3
+	brew cask install musicbrainz-picard
 	#brew cask install xbmc
 	#brew cask install gqrx
 	#brew cask install gpgtools
 	#brew cask install coconutbattery
-	brew cask install battery-time-remaining # problem on yosemite
+
 
 	# Quick Look plugins [source][https://github.com/sindresorhus/quick-look-plugins]
-	brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webp-quicklook suspicious-package && qlmanage -r
+	brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webpquicklook suspicious-package && qlmanage -r
 
 	# Preference panes
 	## A Mac PreferencePane for managing services with launchd/launchctl. https://github.com/jimbojsb/launchrocket
@@ -86,7 +93,7 @@ then
 	echo "You should probably install Homebrew first http://mxcl.github.com/homebrew/"
 else
 	echo "Homebrew found."
-	read -p "Install formulas? (y/n) " -n 1
+	read -p "Install casks? (y/n) " -n 1
 	echo
 	if [[ $REPLY =~ ^[Yy]$ ]]; then
 		installThings

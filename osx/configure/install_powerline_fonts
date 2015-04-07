@@ -1,0 +1,17 @@
+#!/bin/bash
+TDIR=`mktemp -d`
+
+trap "{ cd - ; rm -rf $TDIR; exit 255; }" SIGINT
+
+cd $TDIR
+
+git clone https://github.com/powerline/fonts.git
+cd fonts
+./install.sh
+cd -
+
+cd -
+
+rm -rf $TDIR
+
+exit 0

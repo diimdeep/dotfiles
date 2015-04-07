@@ -1,0 +1,26 @@
+#!/bin/bash
+
+# open script in graphical editor
+# Currently not work for paths
+ge $(realpath $(which $1))
+
+
+# if [[ ! -f $1 ]]; then # path don't exist, not a path ?
+# 	PATH=$(which $1)
+# 	if [[ condition ]]; then
+# 		#statements
+# 	fi
+#     elif [[ -L $FILE ]]; then
+#         printf '%s is a broken symlink!\n' "$1"
+#     else
+#         printf '%s does not exist!\n' "$1"
+#     fi
+# else
+# 	ge $(which $1)
+# fi
+
+# if [ ! -f "$1" ]; then
+#     echo "File $FILE does not exists"
+# else
+
+# fi

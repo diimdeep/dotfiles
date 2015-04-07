@@ -12,6 +12,6 @@ else
 	SUBL="$DOTFILES/osx/bin/subl"
 	echo "Linking $SSUBL to $SUBL"
 
-	ln -s "$SSUBL" "$SUBL"
+	ln -sf "$SSUBL" "$SUBL"
 	chmod +x "$SUBL"
 fi

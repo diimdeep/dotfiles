@@ -1,0 +1,5 @@
+#!/bin/bash
+IPY_DIR=~/Documents/Projects/iPython
+mkdir -p $IPY_DIR
+PORT=$(getport)
+ipython3 notebook --port $PORT --notebook-dir=$IPY_DIR
