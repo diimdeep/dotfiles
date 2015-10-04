@@ -6,7 +6,10 @@ function installThings() {
 	npm install --global grunt-cli
 	npm install --global tldr
 	npm install --global torrent-mount
+	npm install --global node-inspector
+	npm install --global peerflix
 
+	# nw
 	# functional-javascript-workshop
 	# peerflix
 	# shader-school

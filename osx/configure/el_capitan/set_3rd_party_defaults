@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+Flux()
+{
+	defaults write org.herf.Flux moveToApplicationsFolderAlertSuppress -bool true
+	defaults write org.href.Flux SUAutomaticallyUpdate 1
+}
+
+iTerm()
+{
+	# Don’t display the annoying prompt when quitting iTerm
+	defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+}
+
+Transmission()
+{
+	# Don’t prompt for confirmation before downloading
+	defaults write org.m0k.transmission DownloadAsk -bool false
+
+	# Hide the donate message
+	defaults write org.m0k.transmission WarningDonate -bool false
+
+	# Hide the legal disclaimer
+	defaults write org.m0k.transmission WarningLegal -bool false	
+}
+
+Caffeine()
+{
+	defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true	
+}
+
+ClipMenu()
+{
+	defaults write com.naotaka.ClipMenu maxHistorySize -int 100
+	defaults write com.naotaka.ClipMenu numberOfItemsPlaceInline -int 10
+	defaults write com.naotaka.ClipMenu showStatusItem -bool false	
+}
+
+

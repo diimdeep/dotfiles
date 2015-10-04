@@ -2,105 +2,116 @@
 
 # Installs some usefull things using Homebrew
 
-# a = brew('list').replace('\t', '').replace('\n', ' ').split()
-# b = str(cat('/Users/wolf/.dotfiles/osx/configure/install_homebrew_core_tools.sh')).split()
-# for i in a:
-#     print str(i) in b, str(i)
-
 function installThings() {
 	# Make sure we’re using the latest Homebrew
-	echo "Updating.."
-	brew update
+	echo "Updating brew.."
+	brew update	
 
-	# Upgrade any already-installed formulae
-	brew upgrade
-
-	# install some dependencies
-	brew install gdbm --universal
-	brew install sqlite --universal
-	brew install libsndfile
+	brew tap telemachus/homebrew-desc
 
 	brew install git
 
-	brew install zsh tmux
-	brew install fish
-	brew install heroku-toolbelt
+	# install some dependencies
+	brew install gdbm --universal		# library of database functions
+	brew install sqlite --universal 	# SQL database engine
+	brew install libsndfile 			# reading and writing files containing sampled sound
+	brew install ffmpeg --with-libvpx --with-libvorbis --with-openssl --with-theora --with-x265
+	brew install imagemagick
+	brew install icoutils 				# extracting and converting Microsoft icon and cursor images
+	brew install sox --with-flac --with-lame --with-libvorbis	# universal sound sample translator
 
-	brew install smlnj
-	brew install rust
+	#brew install zsh
+	#brew install tmux
+	#brew install fish
+	#brew install heroku-toolbelt
+
+	#brew install smlnj
+	#brew install rust
 	brew install node
-	brew install go
+	#brew install go
 
 	#brew install osxfuse
 	#brew install ntfs-3g
 
-	brew install emacs
-	brew install ncdu
-	brew install dfc
-	brew install z
-	brew install trash
-	brew install submarine
-	brew install ranger
-	brew install pstree
-	berw install media-info
+	#brew install emacs
+	brew install z 						# jump around directories
+	brew install trash 					# moves files or folders to the trash.	
+	brew install ranger 				# console file manager with VI key bindings.
+	brew install pstree	 				# shows the ps listing as a tree
+	brew install pv 					# monitoring the progress of data through a pipeline.
+	brew install grc 					# yet another colouriser
 
-	brew install mitmproxy
+	brew install ncdu 					# Ncdu is a disk usage analyzer with an ncurses interface.
+	brew install dfc					# displays file system space usage using graphs and colors.
+	brew install htop-osx
+	brew install jq 					# lightweight and flexible command-line JSON processor.
+	#brew install findutils
+	brew install rename
+	brew install tree 					# recursive directory listing
+	#brew install keychain
+	brew install ssh-copy-id 
+	brew install pidof					# display the PID number for a given process name
+	brew install testdisk 				# data recovery
+	brew install duti 					# select default applications for document types and URL schemes
+	#brew install https://raw.githubusercontent.com/diimdeep/OSXey/master/osxey.rb
+	brew install fortune
+	brew install ponysay
 
-	brew install pv
-	brew install ninja
-	brew install xctool
+	brew install afsctool
+	brew install apg					# random password generation
+	brew install pdfgrep 				# search text in PDF files
+	brew install unrar					# WinRAR CLI
+	brew install awk
+	
+	brew install peco 					# interactive filtering tool
+	brew install ag 					# faster than awk
+	brew install carthage
+	brew install chisel					# collection of LLDB commands
+	brew install cloc 					# counts blank lines, comment lines, and physical lines of source code
+	brew install --HEAD fzf 			# command-line fuzzy finder.
+	brew install httpie 				# CLI HTTP client
+	brew install shellcheck				# A shell script static analysis tool
+	brew install speedtest_cli
+	brew install terminal-notifier
 
-	brew install gh
-	brew install mongodb
-	brew install postgresql
-	#pgcl
-
-	brew tap telemachus/homebrew-desc
-
-	brew install grc
 
 	# Web tools
+	brew install mitmproxy				# interactive console program that allows traffic flows to be intercepted, inspected, modified and replayed.
 	brew install wget --with-iri
-	brew install curl aria2 w3m
-	brew install bmon
-	brew install siege
-	brew install iftop
+	brew install curl 
+	#brew install aria2 				# download utility
+	#brew install w3m
+	#brew install bmon 					# bandwidth monitor and rate estimator
+	#brew install siege 				# http load testing and benchmarking utility
+	brew install iftop 					# display bandwidth usage on an interface
 	brew install nmap
+	brew install mtr --no-gtk 			# combines ping and traceroute
 
-	## combines ping and traceroute
-	brew install mtr --no-gtk
+	brew install ack	
+	#brew install ninja					# build system with a focus on speed
+	brew install xctool					# replacement for Apple's xcodebuild
+	brew install class-dump
+	brew install valgrind
+	#brew install "${DOTFILES}/osx/configure/brew_formulas/cycript.rb"
+	#brew install binwalk 				# Firmware Analysis Tool
+
+	brew install hub 					# MAKES GIT BETTER WITH GITHUB
+	#brew install mongodb
+	#brew install postgresql
+	
+	brew install commonmark 			# strongly specified, highly compatible implementation of Markdown
 
 	# GNU utilities (those that come with OS X are outdated)
 	brew install coreutils
-	brew install binutils
+	brew install binutils	
 
-	brew install ffmpeg
-
-	# lightweight and flexible command-line JSON processor.
-	brew install jq
-
-	brew install findutils
-	brew install rename tree
-	brew install keychain ssh-copy-id htop-osx
-
-	brew install pidof
-	brew install ack
-	brew install exiv2
-	brew install imagemagick
-	brew install valgrind
-	brew install class-dump
-	brew install testdisk
-	brew install duti
-	brew install https://raw.githubusercontent.com/diimdeep/OSXey/master/osxey.rb
-
-	brew install youtube-dl
-
-	brew install afsctool
-	brew install apg
-
+	brew install exiv2 					# manage image metadata
+	brew install media-info 			# display of the most relevant technical and tag data for video and audio files.
+	brew install submarine 				# Search and download subtitles
 	brew install mp3check
 	brew install mp3val
 	brew install mpck
+	brew install youtube-dl
 
 	# Remove outdated versions from the cellar
 	brew cleanup

@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
+
+
+# https://github.com/kattrali/cocoapods-xcode-plugin
+# https://github.com/FuzzyAutocomplete/FuzzyAutocompletePlugin
+# https://github.com/dealforest/Tuna
+# https://github.com/fortinmike/XcodeBoost
+

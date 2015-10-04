@@ -1,27 +1,28 @@
 #!/usr/bin/env sh
 
 function installThings() {
+	echo "Updating caskroom.."
+	brew update && brew upgrade brew-cask
 
-	# brew cask
-	brew install caskroom/cask/brew-cask
+	brew cask install sublime-text3
 
 	# System
-	brew cask install macports # problem on yosemite
+	#brew cask install macports
 	brew cask install xquartz
-	brew cask install wineskin-winery
+	#brew cask install wineskin-winery
 
 	# File
-	brew cask install android-file-transfer
-	brew cask install double-commander
-	brew cask install mucommander
+	#brew cask install android-file-transfer
+	#brew cask install double-commander
+	#brew cask install mucommander
 
 	# IDEs
-	brew cask install caskroom/versions/java6
+	#brew cask install caskroom/versions/java6
 	brew cask install intellij-idea
 	brew cask install phpstorm
 	brew cask install pycharm
 	brew cask install webstorm
-	brew cask install android-studio
+	#brew cask install android-studio
 	brew cask install appcode
 	brew cask install clion-eap
 	brew cask install 0xdbe-eap
@@ -30,10 +31,13 @@ function installThings() {
 
 	# Dev
 	brew cask install sourcetree
-	brew cask install github
+	brew cask install github-desktop
 	brew cask install cyberduck
 	brew cask install hopper-disassembler
 	brew cask install jeromelebel-mongohub
+	brew cask install mongochef 				# the GUI for MongoDB
+	brew cask install robomongo
+	brew cask install key-codes
 
 	# netlogo
 	# brew cask install wireshark
@@ -42,28 +46,37 @@ function installThings() {
 	# brew cask install xamarin-studio
 	# brew cask install fritzing
 
+	brew cask install sketch-toolbox # sketch plugin manager
+
 	# Tools
 	brew cask install flux
 	brew cask install cd-to
 	brew cask install caffeine
 	brew cask install battery-time-remaining
+	brew cask install clipmenu
 
 	# Virtualization
 	brew cask install virtualbox
+	brew cask install virtualbox-extension-pack
 	brew cask install vagrant
+	brew cask install parallels-virtualization-sdk
 
 	# Web
-	brew cask install opera
+	#brew cask install opera
 	brew cask install torbrowser
-	brew cask install yandex
+	#brew cask install yandex
 	brew cask install firefox
 	brew cask install google-chrome
-	brew cask install bittorrent-sync
-	brew cask install google-earth
-	brew cask install google-hangouts
+	#brew cask install bittorrent-sync
+	#brew cask install google-earth
+	#brew cask install google-hangouts
+	#brew cask install jdownloader
+	brew cask install transmission
+	brew cask install vienna
+	brew cask install virustotaluploader
 
 	# Media
-	brew cask install hugin
+	#brew cask install hugin
 	brew cask install vlc
 	brew cask install kid3
 	brew cask install musicbrainz-picard
@@ -71,10 +84,34 @@ function installThings() {
 	#brew cask install gqrx
 	#brew cask install gpgtools
 	#brew cask install coconutbattery
-
+	brew cask install soundcleod
+	brew cask install nulloy
+	brew cask install $HOME/.dotfiles/osx/configure/brew_casks/popcorn-time.rb 
+	brew cask install vagrant-manager
+	brew cask install gas-mask
+	brew cask install spectacle
+	brew cask install cheatsheet
+	brew cask install keepassx
+	brew cask install limechat
+	brew cask install iterm2
+	brew cask install hocus-focus
+	brew cask install skype
 
 	# Quick Look plugins [source][https://github.com/sindresorhus/quick-look-plugins]
-	brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql webpquicklook suspicious-package && qlmanage -r
+	brew cask install qlcolorcode 
+	brew cask install qlstephen 
+	brew cask install qlmarkdown 
+	brew cask install quicklook-json 
+	brew cask install qlprettypatch 
+	brew cask install quicklook-csv 
+	brew cask install betterzipql 
+	brew cask install qlimagesize 
+	brew cask install webpquicklook 
+	brew cask install suspicious-package 
+	brew cask install provisionql
+	qlmanage -r
+
+	brew cask install terminology
 
 	# Preference panes
 	## A Mac PreferencePane for managing services with launchd/launchctl. https://github.com/jimbojsb/launchrocket
@@ -84,7 +121,12 @@ function installThings() {
 	brew cask install RCDefaultApp
 	## MongoDb
 	brew cask install mongodbpreferencepane
+	brew cask install hosts
 
+	# Screensaver
+	brew cask install fliqlo
+
+	brew cask cleanup
 }
 
 # Check for Homebrew

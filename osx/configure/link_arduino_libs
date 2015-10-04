@@ -1,0 +1,3 @@
+#!/usr/bin/env sh
+
+ln -sFfv "${DOTFILES}/etc/arduino/libraries" "$HOME/Documents/Arduino/libraries"

@@ -1,0 +1,47 @@
+#!/usr/bin/env sh
+
+_macos_version() {
+  sw_vers -productVersion | awk -F. '{print $2}'
+}
+
+_is_el_capitan() {
+  [[ "$(_macos_version)" == "11" ]]
+}
+
+function installBrew() {
+	echo "Installing Homebrew.."
+	ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+}
+
+function postInstallBrew() {
+	brew doctor
+	brew update
+	brew upgrade
+
+	brew tap homebrew/dupes
+	brew tap homebrew/versions	
+
+	echo "Installing Caskroom.."
+	brew install caskroom/cask/brew-cask
+	brew tap caskroom/versions
+	brew tap caskroom/homebrew-versions
+}
+
+function preInstall() {
+	if _is_el_capitan
+	then
+		echo "More info: https://github.com/Homebrew/homebrew/blob/master/share/doc/homebrew/El_Capitan_and_Homebrew.md"
+		echo "Fixing /usr/local permissions"
+		sudo chown $(whoami):admin /usr/local && sudo chown -R $(whoami):admin /usr/local
+	fi	
+}
+
+# Install Homebrew
+if test ! $(which brew)
+then
+	preInstall
+	installBrew
+	postInstallBrew
+else
+	echo "Homebrew found. Going on.."
+fi

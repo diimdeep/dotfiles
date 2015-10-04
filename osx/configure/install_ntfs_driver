@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+echo "TODO"
+exit 1
+
+brew install ntfs-3g
+
+# sudo bless -mount "/Volumes/Windows HD" -legacy -setBoot -nextonly;shutdown -r now
+
+# sudo /bin/cp -RfX /usr/local/Cellar/osxfuse/2.6.4/Library/Filesystems/osxfusefs.fs /Library/Filesystems
+# sudo chmod +s /Library/Filesystems/osxfusefs.fs/Support/load_osxfusefs
+# sudo /bin/cp -RfX /usr/local/Cellar/osxfuse/2.6.4/Library/Filesystems/osxfusefs.fs /Library/Filesystems
+
+# sudo mv /sbin/mount_ntfs /sbin/mount_ntfs.orig
+# do ln -s /usr/local/Cellar/ntfs-3g/2014.2.15/sbin/mount_ntfs /sbin/mount_ntfs
+
