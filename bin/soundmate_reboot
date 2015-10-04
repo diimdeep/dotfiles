@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# Script to reboot Soundmate M1 AirPlay Server
+
+telnet_ 192.168.1.132 root ifconfig
+reboot now

@@ -1,0 +1,8 @@
+#!/usr/bin/env perl
+
+# http://search.cpan.org/dist/YAPE-Regex-Explain/Explain.pm#EXAMPLES
+
+use YAPE::Regex;
+use YAPE::Regex::Explain;
+
+print YAPE::Regex::Explain->new(qr/\Q[abc]\E\d+/)->explain();

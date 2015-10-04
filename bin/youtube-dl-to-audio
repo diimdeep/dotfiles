@@ -1,2 +1,2 @@
 #!/bin/sh
-youtube-dl --max-quality -x $1
+youtube-dl --max-quality -x --audio-format mp3 --no-check-certificate $1

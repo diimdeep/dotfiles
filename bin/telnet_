@@ -1,0 +1,16 @@
+#!/usr/bin/expect
+
+# http://stackoverflow.com/questions/7013137/automating-telnet-session-using-bash-scripts
+
+set timeout 20
+set hostName [lindex $argv 0]
+set userName [lindex $argv 1]
+set password [lindex $argv 2]
+
+spawn telnet $hostName
+
+expect -re ".*login"
+send "$userName\r"
+expect "Password:"
+send "$password\r";
+interact

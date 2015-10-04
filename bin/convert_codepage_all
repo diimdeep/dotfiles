@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# http://superuser.com/questions/27060/batch-convert-files-for-encoding
+# http://stackoverflow.com/questions/9310571/how-to-change-encoding-in-many-files?lq=1
+# http://stackoverflow.com/questions/4544669/batch-convert-latin-1-files-to-utf-8-using-iconv
+find . -type f -exec bash -c 'iconv -f windows-1251 -t utf-8 "{}" > _/"{}"' \;
