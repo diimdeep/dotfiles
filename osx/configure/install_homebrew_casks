@@ -31,6 +31,7 @@ function installThings() {
 
 	# Dev
 	brew cask install sourcetree
+	brew cask install gitup
 	brew cask install github-desktop
 	brew cask install cyberduck
 	brew cask install hopper-disassembler
