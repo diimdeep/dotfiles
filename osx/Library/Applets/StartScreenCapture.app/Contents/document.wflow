@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>346</string>
+	<key>AMApplicationVersion</key>
+	<string>2.3</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>7.7.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>QuickTime Player</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict/>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/New Screen Capture.action</string>
+				<key>ActionName</key>
+				<string>New Screen Capture</string>
+				<key>ActionParameters</key>
+				<dict/>
+				<key>BundleIdentifier</key>
+				<string>com.apple.NewScreenCapture</string>
+				<key>CFBundleVersion</key>
+				<string>7.7.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryMovies</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMAppleScriptAction</string>
+				<key>InputUUID</key>
+				<string>BAEC6DDB-F664-4839-BEC3-ED18ADA97276</string>
+				<key>Keywords</key>
+				<array>
+					<string>QuickTime</string>
+					<string>Movie</string>
+					<string>Capture</string>
+					<string>Video</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>8EED7FB5-DBF8-491D-B0E2-7BFA6617095A</string>
+				<key>UUID</key>
+				<string>E48923DC-9C33-4180-A82C-96328177CE78</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>QuickTime Player</string>
+				</array>
+				<key>arguments</key>
+				<dict/>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/New Screen Capture.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+		</dict>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMAccepts</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Optional</key>
+					<true/>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMActionVersion</key>
+				<string>7.7.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>QuickTime Player</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>waitForCompletion</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.object</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Start Capture.action</string>
+				<key>ActionName</key>
+				<string>Start Capture</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>waitForCompletion</key>
+					<false/>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.StartCapture</string>
+				<key>CFBundleVersion</key>
+				<string>7.7.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryMovies</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMAppleScriptAction</string>
+				<key>InputUUID</key>
+				<string>DB69F8F1-4B2B-44E8-A7F7-076D96AB530C</string>
+				<key>Keywords</key>
+				<array>
+					<string>QuickTime</string>
+					<string>Movie</string>
+					<string>Capture</string>
+					<string>Start</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>749A5E66-4CD5-4C84-B5ED-1305635A8606</string>
+				<key>UUID</key>
+				<string>F1A3BA3F-3CB8-4D8F-89F8-02EC4EE9ADC5</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>QuickTime Player</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>waitForCompletion</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>505.000000:488.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Start Capture.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict>
+		<key>6D81AFEE-413D-4242-A4B0-5F28A69C5A5F</key>
+		<dict>
+			<key>from</key>
+			<string>E48923DC-9C33-4180-A82C-96328177CE78 - E48923DC-9C33-4180-A82C-96328177CE78</string>
+			<key>to</key>
+			<string>F1A3BA3F-3CB8-4D8F-89F8-02EC4EE9ADC5 - F1A3BA3F-3CB8-4D8F-89F8-02EC4EE9ADC5</string>
+		</dict>
+	</dict>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.application</string>
+	</dict>
+</dict>
+</plist>

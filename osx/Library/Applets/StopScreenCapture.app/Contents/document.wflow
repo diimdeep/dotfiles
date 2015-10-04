@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AMApplicationBuild</key>
+	<string>346</string>
+	<key>AMApplicationVersion</key>
+	<string>2.3</string>
+	<key>AMDocumentVersion</key>
+	<string>2</string>
+	<key>actions</key>
+	<array>
+		<dict>
+			<key>action</key>
+			<dict>
+				<key>AMActionVersion</key>
+				<string>7.7.1</string>
+				<key>AMApplication</key>
+				<array>
+					<string>QuickTime Player</string>
+				</array>
+				<key>AMParameterProperties</key>
+				<dict>
+					<key>shouldClose</key>
+					<dict/>
+				</dict>
+				<key>AMProvides</key>
+				<dict>
+					<key>Container</key>
+					<string>List</string>
+					<key>Types</key>
+					<array>
+						<string>com.apple.applescript.alias-object.movie</string>
+					</array>
+				</dict>
+				<key>AMRequiredResources</key>
+				<array/>
+				<key>ActionBundlePath</key>
+				<string>/System/Library/Automator/Stop Capture.action</string>
+				<key>ActionName</key>
+				<string>Stop Capture</string>
+				<key>ActionParameters</key>
+				<dict>
+					<key>shouldClose</key>
+					<false/>
+				</dict>
+				<key>BundleIdentifier</key>
+				<string>com.apple.StopCapture</string>
+				<key>CFBundleVersion</key>
+				<string>7.7.1</string>
+				<key>CanShowSelectedItemsWhenRun</key>
+				<true/>
+				<key>CanShowWhenRun</key>
+				<true/>
+				<key>Category</key>
+				<array>
+					<string>AMCategoryMovies</string>
+				</array>
+				<key>Class Name</key>
+				<string>AMAppleScriptAction</string>
+				<key>Keywords</key>
+				<array>
+					<string>QuickTime</string>
+					<string>Movie</string>
+					<string>Capture</string>
+					<string>Stop</string>
+				</array>
+				<key>OutputUUID</key>
+				<string>33CF4111-8C08-4079-A9E1-06A61C9F54D2</string>
+				<key>UUID</key>
+				<string>011F1A58-A253-47B1-B057-6F404DC116E2</string>
+				<key>UnlocalizedApplications</key>
+				<array>
+					<string>QuickTime Player</string>
+				</array>
+				<key>arguments</key>
+				<dict>
+					<key>0</key>
+					<dict>
+						<key>default value</key>
+						<false/>
+						<key>name</key>
+						<string>shouldClose</string>
+						<key>required</key>
+						<string>0</string>
+						<key>type</key>
+						<string>0</string>
+						<key>uuid</key>
+						<string>0</string>
+					</dict>
+				</dict>
+				<key>conversionLabel</key>
+				<integer>0</integer>
+				<key>isViewVisible</key>
+				<true/>
+				<key>location</key>
+				<string>505.000000:554.000000</string>
+				<key>nibPath</key>
+				<string>/System/Library/Automator/Stop Capture.action/Contents/Resources/English.lproj/main.nib</string>
+			</dict>
+			<key>isViewVisible</key>
+			<true/>
+		</dict>
+	</array>
+	<key>connectors</key>
+	<dict/>
+	<key>workflowMetaData</key>
+	<dict>
+		<key>workflowTypeIdentifier</key>
+		<string>com.apple.Automator.application</string>
+	</dict>
+</dict>
+</plist>
