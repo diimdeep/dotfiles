@@ -1,0 +1,94 @@
+#!/bin/sh
+
+backup_directory=${OSX_SETTINGS_BACKUP:-${HOME}/Backup/Settings}
+library_directory=${OSX_SETTINGS_LIBRARY:-${HOME}/Library}
+config_directory=${OSX_SETTINGS_CONFIG:-${DOTFILES}/osx/configure/osx_settings/config}
+rsync_args="-a --recursive"
+quiet=0
+
+
+function usage {
+    echo "Usage:
+    settings [args] backup [app ...]
+    settings [args] restore [app ...]
+
+Args:
+    -b dir      set backup dir, default ~/Dropbox/Settings
+    -c dir      set config dir, default ~/etc/osx_settings
+    -h          show help
+    -l dir      set library dir, default ~/Library
+    -q          quiet, no output
+    -v          verbose, output all files copied"
+    exit 1
+}
+function act_on_files {
+    local action=$1
+    shift
+
+    local all_apps=`list_all_apps`
+    local list="${@:-$all_apps}"
+
+    for app in $list; do
+        $action $app
+    done
+}
+function backup_app {
+    local app=$1
+
+    [ $quiet -eq 0 ] && \
+        echo Backing up $app
+
+    rsync ${rsync_args}                                     \
+        --files-from="${config_directory}/${app}.conf"      \
+        "${library_directory}"                              \
+        "${backup_directory}/${app}"
+}
+function restore_app {
+    local app=$1
+
+    [ $quiet -eq 0 ] && \
+        echo Restoring $app
+
+    rsync ${rsync_args}                                     \
+        --files-from="${config_directory}/${app}.conf"      \
+        "${backup_directory}/${app}"                        \
+        "${library_directory}"
+}
+function list_all_apps {
+    local app
+    local list=""
+
+    for app in $config_directory/*.conf; do
+        app=`basename $app .conf`
+        list="$list $app"
+    done
+
+    echo $list
+}
+
+while getopts "b:c:hl:qv" option; do
+    case $option in
+        b)  backup_directory="${OPTARG}"                ;;
+        c)  config_directory="${OPTARG}"                ;;
+        h)  usage                                       ;;
+        l)  library_directory="${OPTARG}"               ;;
+        q)  quiet=1                                     ;;
+        v)  rsync_args="${rsync_args} -v"               ;;
+        *)  echo "Unknown argument: $option"
+            usage                                       ;;
+    esac
+done
+shift $(( OPTIND -1 ))
+
+arg="$1"
+shift
+
+case "$arg" in
+    backup)     act_on_files backup_app "$@"
+                ;;
+    restore)    act_on_files restore_app "$@"
+                ;;
+    *)          echo "Unknown argument: $1"
+                usage
+                ;;
+esac
