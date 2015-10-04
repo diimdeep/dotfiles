@@ -1,0 +1,100 @@
+#!/usr/bin/env ruby
+#
+# A ping 'GUI' for the command line using sparklines.
+#
+# Example:
+#
+#    $ ./spark-ping google.com
+#    ▃▇▄▄▅▄▃▃▃▄▃▃▄▄▄▄▅▄▅▃▅▃▃▃▄▄▃▃▄▅▄▃▄▃ 24.731 ms
+#
+# Implemented as a Ruby wrapper around your system's normal `ping` utility. 
+# Does not require any special gems, so it should work out of the box on
+# many platforms.  Only tested with OSX and Linux `ping`.
+# 
+# The sparklines are multi-byte UTF8 characters, so your terminal may or may
+# not display them correctly.  Tested on Mac OSX using Terminal.app and iTerm2.
+#
+# Joe Miller (http://joemiller.me, https://github.com/joemiller). 11/16/2011
+
+require 'pty'
+
+def command_exists?(command)
+  ENV['PATH'].split(File::PATH_SEPARATOR).any? {|d| File.exists? File.join(d, command) }
+end
+
+def detect_terminal_size
+    if (ENV['COLUMNS'] =~ /^\d+$/) && (ENV['LINES'] =~ /^\d+$/)
+      [ENV['COLUMNS'].to_i, ENV['LINES'].to_i]
+    elsif (RUBY_PLATFORM =~ /java/ || (!STDIN.tty? && ENV['TERM'])) && command_exists?('tput')
+      [`tput cols`.to_i, `tput lines`.to_i]
+    elsif STDIN.tty? && command_exists?('stty')
+      `stty size`.scan(/\d+/).map { |s| s.to_i }.reverse
+    else
+      nil
+    end
+  rescue
+    nil
+end
+
+def spark(durations)
+  return "" unless durations.size > 1
+  
+  ticks=%w[▁ ▂ ▃ ▄ ▅ ▆ ▇]
+
+  range = durations.max - durations.min
+  scale = ticks.length - 1
+  distance = durations.max.to_f / ticks.size
+  
+  str = ''
+  durations.each do |val|
+    tick = (val / distance).round - 1
+    str << ticks[tick]
+  end
+  str
+end
+
+### main --
+if __FILE__ == $0
+  trap("INT") { puts; exit }
+  # XXX: could also trap WINCH to detect changes in terminal size..
+
+  (columns,lines) = detect_terminal_size
+  durations = []
+  
+  begin
+    PTY.spawn( "ping #{ARGV.join(' ')}" ) do |stdin, stdout, pid|
+      begin
+        stdin.each do |line|
+          ## if we see 'usage:' or 'ping: ..' an error probably occurred
+          ## so flush the output from ping and exit. (XXX: this is hacky)
+          if line =~ /^usage:/i or line =~ /^ping:/
+            puts line
+            puts stdin.readlines
+            exit 1
+          end
+          
+          duration = line.scan( /time=(\S+)/ ).last
+          durations << duration.first.to_f unless duration.nil?
+        
+          sparkline = spark( durations )
+          output = "#{sparkline} #{durations.last} ms\r"
+          print output
+
+          # if we reach the end of the line, reset and start on next line.
+          # NOTE: need to use a regex to count the number of chars        
+          # because `output` is a multibyte utf8 string.
+          if output.scan(/./mu).size >= columns
+            durations = []
+            puts
+          end
+        end
+      rescue Errno::EIO
+        puts "IO error (EIO)" # XXX
+      end
+    end
+  rescue PTY::ChildExited
+    puts "ping exited unexpectedly" # XXX
+  end
+  
+  puts
+end

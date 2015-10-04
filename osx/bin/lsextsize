@@ -1,0 +1,13 @@
+#!/bin/bash
+
+gfind . -type f -printf "%s\t%f\n" | awk '
+{
+ split($2, ext, ".")
+ e = ext[length(ext)]
+ size[e] += $1
+}
+
+END{
+ for(i in size)
+   print size[i], i
+}' | sort -n

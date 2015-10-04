@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+ping -i 0.2 `netstat -nr | grep -m 1 '^default' | awk '{print $2;}'`

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+if $(/usr/bin/which -s "$@"); then
+	test_path=$(/usr/bin/which "$@")
+	ls --color=auto -F --color=always -lhFrt $test_path
+fi

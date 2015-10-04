@@ -1,0 +1,56 @@
+#!/bin/bash
+width=50
+depth=1
+arg=.
+
+function usage {
+    echo "Usage: lsc [OPTIONS]... [FILE]...
+
+Column ls.
+
+Args:
+    -d depth      default: 1"
+    exit 1
+}
+
+while getopts "d:h" option; do
+    case $option in
+        d)  depth="${OPTARG}"                ;;
+        h)  usage;                                   ;;
+        *)  echo "Unknown argument: $option"
+            usage;                                       ;;
+    esac
+done
+
+shift $(( OPTIND -1 ))
+
+if [[ $@ ]]; then
+	arg=$@
+fi
+
+gawk -F':' '
+
+/directory/{
+  d[i++]=$1
+  next
+}
+
+/executable/{
+  e[j++]=$1
+  next
+}
+
+{
+  f[k++]=$1
+}
+
+END{
+  a[1]=i;a[2]=j;a[3]=k
+  asort(a)
+  printf("%-*.*s | \t%-*.*s | \t%-*.*s\n", w,w,"Directories", w,w,"Executables", w,w,"Files")
+  for (z=0;z<w;z++ )
+    printf("---")
+  print "--"
+  for (i=0;i<a[3];i++)
+    printf("%-*.*s |\t%-*.*s |\t%-*.*s\n", w,w,d[i], w,w,e[i], w,w,f[i])
+}' w=$width < <(find $arg -d $depth -exec file {} +)

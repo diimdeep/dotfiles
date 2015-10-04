@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+TDIR=`mktemp -d`
+trap "{ cd - ; rm -rf $TDIR; exit 255; }" SIGINT
+
+xcodebuild install DSTROOT="$TDIR"
+open $TDIR/Applications
