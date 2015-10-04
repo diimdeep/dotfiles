@@ -1,0 +1,97 @@
+#!/usr/bin/env sh
+
+# install ipython for system python
+sudo easy_install-2.6 pip
+sudo pip2.6 install readline ipython==1.2.1
+
+
+brew install python --universal
+brew install python3 --universal
+
+
+# tool for query pypi
+pip install yolk
+
+pip install textblob
+pip install matplotlib
+pip install pandas cpickle numpy
+pip install numpy
+pip install pandas
+pip install scikit-learn
+pip install scipy
+pip install matplotlib --upgrade
+
+python -m textblob.download_corpora
+
+
+#brew install Matplotlib
+#brew install scipy
+#brew install sympy
+#brew install pillow
+
+pip install --upgrade setuptools
+pip install --upgrade pip
+pip3 install --upgrade setuptools
+
+pip install ipython[notebook] --upgrade
+
+brew tap homebrew/python
+brew install numpy
+brew install Matplotlib
+brew install scipy
+brew install pillow
+
+pip install sympy
+pip install -U scikit-image
+pip install -U scikit-learn
+
+
+pip install sh
+pip install pudb
+pip install plumbum
+pip install requests
+pip install bs4
+pip install BeautifulSoup
+pip install BeautifulSoup4
+
+
+pip install virtualenv
+pip install virtualenvwrapper
+
+pip install dtrx
+
+# dependend on 'brew install libsndfile'
+pip install scikits.audiolab
+
+# coursera.com massive open online courses (MOOC) downloader
+pip install coursera-dl
+
+pip
+  virtualenv
+  virtualenvwrapper
+  SpoofMAC
+  sh
+  scipy
+  scikit-learn
+  scikit-image
+  pudb
+  plumbum
+  numpy
+  lxml
+  Jinja2
+  ipython
+  argparse
+  backports.ssl-match-hostname
+  docutils
+  matplotlib
+
+ pip3
+  beautifulsoup4
+  docutils
+  feedgenerator
+  ipdb
+  ipython
+  Jinja2
+  lxml
+  Pygments
+  pymongo

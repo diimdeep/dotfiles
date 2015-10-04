@@ -1,0 +1,61 @@
+#!/usr/bin/osascript
+
+--http://brettterpstra.com/2012/12/08/a-useful-caps-lock-key/
+--http://apple.stackexchange.com/questions/13598/updating-modifier-key-mappings-through-defaults-command-tool
+
+set keyboardName to "natural"
+
+--reboot system preferences to make GUI state more predictable
+tell application "System Preferences"
+	quit
+	delay 1
+	activate
+	delay 1
+	activate
+end tell
+
+tell application "System Events"
+	
+	--Bring up keyboard prefs
+	key code 53 --escape
+	keystroke "f" using command down
+	delay 0.5
+	key code 53 --escape
+	keystroke "keyboard"
+	delay 0.5
+	key code 36 --return
+	delay 1
+	
+	--Open modifier keys submenu
+	repeat 4 times
+		keystroke tab using shift down
+		--delay 0.1
+	end repeat
+	--delay 0.1
+	keystroke space
+	delay 0.1
+	
+	--Select keyboard
+	keystroke space
+	keystroke keyboardName
+	keystroke return
+	delay 0.5
+	
+	
+	--Open "Caps Lock" drop-down && select "No action"
+	keystroke space
+	delay 0.1
+	repeat 4 times
+		key code 125 --down arrow
+	end repeat
+	delay 0.1
+	keystroke return
+	
+	delay 0.1
+	
+	keystroke return
+	
+	tell application "System Preferences"
+		quit
+	end tell
+end tell
