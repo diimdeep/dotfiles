@@ -5,11 +5,12 @@ function installThings() {
 	brew update && brew upgrade brew-cask
 
 	brew cask install sublime-text3
+	brew cask install atom
 
 	# System
 	#brew cask install macports
 	brew cask install xquartz
-	#brew cask install wineskin-winery
+	brew cask install wineskin-winery
 
 	# File
 	#brew cask install android-file-transfer
@@ -97,6 +98,7 @@ function installThings() {
 	brew cask install iterm2
 	brew cask install hocus-focus
 	brew cask install skype
+	brew cask install jadengeller-helium
 
 	# Quick Look plugins [source][https://github.com/sindresorhus/quick-look-plugins]
 	brew cask install qlcolorcode 

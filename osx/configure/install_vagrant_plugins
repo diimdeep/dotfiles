@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+EXIT 1
+
+landrush (0.18.0)
+vagrant-aws (0.6.0)
+vagrant-digitalocean (0.7.7)
+vagrant-omnibus (1.4.1)
+vagrant-parallels (1.4.1)
