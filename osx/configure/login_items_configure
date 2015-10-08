@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# https://github.com/MoOx/setup/tree/master/preferences
+
+function osxLoginItem {
+  osascript -e "tell application \"System Events\" to make login item at end with properties {hidden:false, path:\"$1\", name:\"$2\" }" > /dev/null
+}
+
+osxLoginItem "$HOME/Applications/Spectacle.app" "Spectacle"
+
+echo "OS X Login items: $(osascript -e 'tell application "System Events" to get the name of every login item')"

@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 
 function installThings() {
 	echo "Updating caskroom.."
@@ -76,6 +76,7 @@ function installThings() {
 	brew cask install transmission
 	brew cask install vienna
 	brew cask install virustotaluploader
+	brew cask install dropbox
 
 	# Media
 	#brew cask install hugin
@@ -88,7 +89,7 @@ function installThings() {
 	#brew cask install coconutbattery
 	brew cask install soundcleod
 	brew cask install nulloy
-	brew cask install $HOME/.dotfiles/osx/configure/brew_casks/popcorn-time.rb 
+	brew cask install $HOME/.dotfiles/osx/configure/brew_casks/popcorn-time.rb
 	brew cask install vagrant-manager
 	brew cask install gas-mask
 	brew cask install spectacle
@@ -101,16 +102,16 @@ function installThings() {
 	brew cask install jadengeller-helium
 
 	# Quick Look plugins [source][https://github.com/sindresorhus/quick-look-plugins]
-	brew cask install qlcolorcode 
-	brew cask install qlstephen 
-	brew cask install qlmarkdown 
-	brew cask install quicklook-json 
-	brew cask install qlprettypatch 
-	brew cask install quicklook-csv 
-	brew cask install betterzipql 
-	brew cask install qlimagesize 
-	brew cask install webpquicklook 
-	brew cask install suspicious-package 
+	brew cask install qlcolorcode
+	brew cask install qlstephen
+	brew cask install qlmarkdown
+	brew cask install quicklook-json
+	brew cask install qlprettypatch
+	brew cask install quicklook-csv
+	brew cask install betterzipql
+	brew cask install qlimagesize
+	brew cask install webpquicklook
+	brew cask install suspicious-package
 	brew cask install provisionql
 	qlmanage -r
 
@@ -133,7 +134,7 @@ function installThings() {
 }
 
 # Check for Homebrew
-if test ! $(which brew)
+if test ! "$(which brew)"
 then
 	echo "You should probably install Homebrew first http://mxcl.github.com/homebrew/"
 else

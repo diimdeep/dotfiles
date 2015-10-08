@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+source `dirname $0`/../../etc/helpers.sh
+
+SUBLIME_PREFS_DIR="$HOME/Library/Application Support/Sublime Text 3"
+package_control_file="$SUBLIME_PREFS_DIR/Installed Packages/Package Control.sublime-package"
+
+header "Sublime Text"
+
+bullet "Installing package control... "
+
+if [[ -e "$package_control_file" ]]; then
+  info "already installed"
+else
+  echo
+  make_dir "$SUBLIME_PREFS_DIR/Installed Packages"
+  curl https://sublime.wbond.net/Package%20Control.sublime-package -o "$package_control_file"
+  success "done"
+fi
+
+#bullet "Symlink preferences... "
+#make_dir "$SUBLIME_PREFS_DIR/Packages/"
+#symlink "$HOME/.dotfiles/osx/etc/SublimeText3_User" "$SUBLIME_PREFS_DIR/Packages/User"
