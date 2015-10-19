@@ -10,6 +10,9 @@ iTerm()
 {
 	# Don’t display the annoying prompt when quitting iTerm
 	defaults write com.googlecode.iterm2 PromptOnQuit -bool false
+
+	# scroll less... output with mouse (iTerm 2.9+)
+	defaults write com.googlecode.iterm2 AlternateMouseScroll -bool true
 }
 
 Transmission()
@@ -21,19 +24,23 @@ Transmission()
 	defaults write org.m0k.transmission WarningDonate -bool false
 
 	# Hide the legal disclaimer
-	defaults write org.m0k.transmission WarningLegal -bool false	
+	defaults write org.m0k.transmission WarningLegal -bool false
 }
 
 Caffeine()
 {
-	defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true	
+	defaults write com.lightheadsw.caffeine SuppressLaunchMessage -bool true
 }
 
 ClipMenu()
 {
 	defaults write com.naotaka.ClipMenu maxHistorySize -int 100
 	defaults write com.naotaka.ClipMenu numberOfItemsPlaceInline -int 10
-	defaults write com.naotaka.ClipMenu showStatusItem -bool false	
+	defaults write com.naotaka.ClipMenu showStatusItem -bool false
 }
 
-
+SourceTree()
+{
+		mkdir -p "/Users/wolf/Library/Application Support/SourceTree"
+		cp "/Users/wolf/.dotfiles/osx/etc/SourceTree/sourcetree.license" "/Users/wolf/Library/Application Support/SourceTree"
+}

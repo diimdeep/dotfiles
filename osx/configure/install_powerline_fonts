@@ -1,4 +1,8 @@
 #!/bin/bash
+
+# pre-patched and adjusted fonts for usage with the new Powerline
+# Powerline is a statusline plugin for vim, and provides statuslines and prompts for several other applications.
+
 TDIR=`mktemp -d`
 
 trap "{ cd - ; rm -rf $TDIR; exit 255; }" SIGINT

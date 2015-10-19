@@ -48,7 +48,7 @@ AmbientLightSensor()
 	sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Display Enabled" -bool false
 
 	# Keyboard -> Adjust keyboard brightness in low light
-	sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool false	
+	sudo defaults write /Library/Preferences/com.apple.iokit.AmbientLightSensor "Automatic Keyboard Enabled" -bool false
 }
 
 Screen()
@@ -82,7 +82,7 @@ Security()
 	echo "Security"
 	# Require password immediately after sleep or screen saver begins
 	defaults write com.apple.screensaver askForPassword -int 1
-	defaults write com.apple.screensaver askForPasswordDelay -int 0	
+	defaults write com.apple.screensaver askForPasswordDelay -int 0
 
 	# Disable guest user
 	defaults write com.apple.AppleFileServer guestAccess -bool false
@@ -99,7 +99,7 @@ LoginWindow()
 	sudo defaults write /Library/Preferences/com.apple.loginwindow RetriesUntilHint -int 0
 
 	# Allow fast user switching
-	#sudo defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool true	
+	#sudo defaults write /Library/Preferences/.GlobalPreferences MultipleSessionEnabled -bool true
 }
 
 
@@ -150,7 +150,7 @@ General()
 
 	# Restart automatically if the computer freezes
 	# systemsetup -setrestartfreeze on
-	
+
 	# Build locate database (/var/db/locate.database)
 	sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 }
@@ -166,7 +166,7 @@ Screenshots()
 	defaults write com.apple.screencapture type -string "png"
 
 	# Disable shadow in screenshots
-	defaults write com.apple.screencapture disable-shadow -bool true	
+	defaults write com.apple.screencapture disable-shadow -bool true
 }
 
 
@@ -229,7 +229,7 @@ Spotlight()
 	# Make sure indexing is enabled for the main volume
 	#sudo mdutil -i on / > /dev/null
 	# Rebuild the index from scratch
-	#sudo mdutil -E / > /dev/null	
+	#sudo mdutil -E / > /dev/null
 }
 
 TimeMachine()
@@ -336,7 +336,7 @@ InputDevices()
 	# Disable auto-correct
 	defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
 	defaults write NSGlobalDomain WebAutomaticSpellingCorrectionEnabled -bool false
-	 
+
 	 # Turn Bluetooth off.
  	sudo defaults write /Library/Preferences/com.apple.Bluetooth ControllerPowerState -int 0
 }
@@ -352,7 +352,7 @@ LanguageAndRegion()
 MenuBar()
 {
 	echo "Menu bar items"
-	
+
 	# Affected: SystemUIServer
 
 	defaults write com.apple.systemuiserver menuExtras -array \
@@ -581,7 +581,7 @@ Dock()
 	defaults write com.apple.dock autohide -bool true
 
 	# auto-hiding Dock delay
-	defaults write com.apple.dock autohide-delay -float .15 
+	defaults write com.apple.dock autohide-delay -float .15
 
 	# animation when hiding/showing the Dock
 	defaults write com.apple.dock autohide-time-modifier -float .8
@@ -649,9 +649,9 @@ Safari()
 }
 
 Calendar()
-{	
+{
 	echo "Calendar.app"
-	
+
 	# day start 8:00, end at 20:00
 	defaults write com.apple.iCal "first minute of work hours" $((8 * 60))
 	defaults write com.apple.iCal "last minute of work hours" $((20 * 60))
@@ -712,6 +712,13 @@ Terminal()
 
 	# New tabs open with Default Working Directory
 	defaults write com.apple.Terminal NewTabWorkingDirectoryBehavior -bool true
+
+	# plist=~/Library/Preferences/com.apple.Terminal.plist
+	# # theme settings
+	# /usr/libexec/PlistBuddy -c "Add :Window\ Settings:Pro:FontAntialias integer 1" $plist &> /dev/null
+
+	# Disable Bash sessions in OS X El Capitan
+	touch ~/.bash_sessions_disable
 }
 
 

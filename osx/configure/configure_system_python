@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+source `dirname $0`/../../etc/helpers.sh
+
+_header "python2.6.."
+
+_bullet "Installing pip2.6"
+sudo easy_install-2.6 pip
+
+echo
+
+_bullet "Installing iPython 1.2.1"
+sudo pip2.6 install readline ipython==1.2.1
+
+echo
+
+_success "Done"
