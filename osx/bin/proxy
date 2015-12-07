@@ -1,0 +1,141 @@
+#!/usr/bin/env bash
+# SSH SOCKS proxy script for Mac OS X
+
+# Set PROXY_USER and PROXY_HOST somewhere in sourced path i.e. enter following
+# info into .bashrc or .zshrc or a more private auth file
+#
+#   $ export PROXY_USER='user'
+#   $ export PROXY_HOST='example.com'
+#   $ export PROXY_SSHPORT='4444'
+
+# source: https://github.com/diimdeep/osx-proxy
+
+remote=${2:-$PROXY_USER@$PROXY_HOST}
+interface="Wi-Fi" # "Display Ethernet" "Wi-Fi"
+
+# Let's look to see whether PROXY_SSHPORT is set - it may be that
+# the user doesn't want to try to automatically connect to port 22,
+# so check if PROXY_SSHPORT is set, otherwise use 22
+
+if [ -z "$PROXY_SSHPORT" ]; then
+	remoteport=22
+else
+	remoteport=$PROXY_SSHPORT
+fi
+
+
+# Get the min and max system-available ports.
+lowerport=`sysctl net.inet.ip.portrange.first | cut -d " " -f 2`
+upperport=`sysctl net.inet.ip.portrange.last | cut -d " " -f 2`
+
+localport=`jot -r 1 $lowerport $upperport`
+
+usage(){
+    echo ""
+    echo "Usage: proxy [on|off|killall|shutdown|no_args]"
+    echo "Proxy is a proxy settings toggle script for OSX"
+    echo "Proxy initiates an SSH tunnel and then enables a Socks proxy"
+}
+
+unknown_input(){
+    echo "Unknown input, try again with different term"
+}
+
+get_proxy_state(){
+    result=`networksetup -getsocksfirewallproxy "$interface" -Fi | head -1 | cut -d ' ' -f2`
+    echo $result
+}
+
+proxy_on(){
+  # Let's check to see if there's already a running ssh session
+  if [ -f "/var/run/osx-proxy.pid" ]; then
+	runpid=`cat /var/run/osx-proxy.pid`
+	proccheck=`ps -ef | grep $runpid | grep -v grep`
+	# If the pidfile is there, but the process isn't running, something went wrong
+	if [ $? == 1 ]; then
+		echo "Pidfile /var/run/osx-proxy.pid exists, but process $runpid is not running. Please delete pidfile and retry"
+		exit 1
+	fi
+   	# So the process is running, let's figure out what port it's currently on
+	runport=`echo $proccheck | awk '{print $13}'`
+	echo "ssh proxy is already running with pid $runpid on port $runport."
+	exit 1
+  fi
+  echo "Listening on localhost:$localport. Modifying network settings.."
+  sudo networksetup -setsocksfirewallproxy "$interface" 127.0.0.1 $localport off
+  echo "Starting SSH session. Will run in background for 1 day."
+  ssh -N -f -p $remoteport -D $localport $remote sleep 1d
+  #  Since $$ doesn't seem to trap ssh properly (probably because ssh hasn't technically exited)
+  #  let's figure out the running pid and store it as a pidfile, as well as make it owned by
+  #  the proper user so it can be unliked when we shut the proxy down
+  pid=`ps -ef | grep "ssh -N -f -p $remoteport -D $localport" | grep -v grep | awk '{print $2}'`
+	echo "SSH started with pid $pid"
+  sudo sh -c "echo $pid > /var/run/osx-proxy.pid"
+}
+
+
+proxy_off(){
+    echo "Disabling proxy in network settings."
+    sudo networksetup -setsocksfirewallproxystate "$interface" off
+    echo "Done!"
+}
+
+kill_all(){
+  # in lieu of just blindly killing ssh commands, let's kill the specific running PID that we have
+  # Also, check to make sure the pidfile exists
+  if [ -e "/var/run/osx-proxy.pid" ]; then
+  	pid=`cat /var/run/osx-proxy.pid`
+  else
+	echo "Pidfile /var/run/osx-proxy.pid doesn't exist, so we're assuming there's no running sessions"
+	exit 1
+  fi
+  echo "Killing running proxy connection. You may get prompted for a password for sudo to remove the pidfile"
+  kill -9 $pid && sudo rm -f /var/run/osx-proxy.pid
+}
+
+
+shutdown(){
+    proxy_off
+    kill_all
+    echo "Proxy shutdown complete!"
+}
+
+toggle_state(){
+    # result=`get_proxy_state`
+    echo $(get_proxy_state) | grep -i 'y' >> /dev/null
+    if [[ $? =~ 0 ]]; then
+        shutdown
+        echo "OFF"
+    else
+        proxy_on
+        echo "ON"
+    fi
+}
+
+case $1 in
+    "on")
+        proxy_on
+    ;;
+    "off")
+        proxy_off
+    ;;
+    "status")
+        get_proxy_state
+    ;;
+    "killall")
+        kill_all
+    ;;
+    "shutdown")
+        shutdown
+    ;;
+    "usage")
+        usage
+    ;;
+    "")
+        toggle_state
+    ;;
+    *)
+        unknown_input
+        usage
+    ;;
+esac
