@@ -1,5 +1,12 @@
 #!/usr/bin/env bash
 
+
+set_default_apps {
+	for ext in {mp3,flac,wav}; do duti -s com.coppertino.Vox "${ext}" all; done # audio
+	for ext in {mkv,avi}; do duti -s org.videolan.vlc "${ext}" all; done # video
+	#for ext in {7z,bz2,gz,rar,tar,zip}; do duti -s com.aone.keka "${ext}" all; done # archives
+}
+
 Flux()
 {
 	defaults write org.herf.Flux moveToApplicationsFolderAlertSuppress -bool true
