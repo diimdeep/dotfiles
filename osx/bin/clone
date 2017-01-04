@@ -14,9 +14,9 @@ if len(sys.argv) > 1:
 	#print(parsed_url)
 	repo_name = path.name
 	user_name = path.parent.name
-	clone_to =  repo_name + " @" + user_name
+	clone_to =  repo_name + "___" + user_name
 
-	try:	
+	try:
 		subprocess.check_call(["git", "clone", parsed_url.geturl(), clone_to])
 	except subprocess.CalledProcessError as e:
 		print(e.output)

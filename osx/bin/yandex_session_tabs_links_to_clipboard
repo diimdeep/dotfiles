@@ -23,7 +23,7 @@ set urlList to ""
 
 try
 
-	tell application "Safari"
+	tell application "Yandex"
 		-- count the windows
 		set winCount to count of windows
 		-- loop through the windows
@@ -34,7 +34,7 @@ try
 			repeat with j from 1 to tabCount
 				set aTab to tab j of window i
 				set aLink to _template
-				set aLink to my snr("%name", name of aTab, aLink)
+				set aLink to my snr("%name", title of aTab, aLink)
 				set aLink to my snr("%url", URL of aTab, aLink)
 				set urlList to urlList & aLink & return
 			end repeat
@@ -49,12 +49,10 @@ try
 	-- end tell
 
 	set the clipboard to urlList
-	display notification "Copied to clipboard." with title "Safari session export"
+	display notification "Copied to clipboard." with title "Yandex session export"
 
 on error the error_message number the error_number
-	--display notification "Error: " & the error_number & ". " & the error_message with title "Safari session export"
 	--display dialog "Error: " & the error_number & ". " & the error_message buttons {"OK"} default button 1
 	set the clipboard to urlList
-	display notification "Copied to clipboard." with title "Safari session export"
-
+	display notification "There was error, but we did copy tabs to clipboard." with title "Session export"
 end try

@@ -2,9 +2,10 @@
 # open the Finder directory in the terminal
 # source http://apple.stackexchange.com/questions/12161/os-x-terminal-must-have-utilities
 
-target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
-if [ "$target" != "" ]; then
-    cd "$target"; pwd
+TARGET_DIR=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+if [ "$TARGET_DIR" != "" ]; then
+    cd "$TARGET_DIR"
+    pwd
 else
     echo 'No Finder window found' >&2
 fi

@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+brew cask cleanup
+brew cleanup
+rm -rf /tmp/webtorrent
+rm -rf /tmp/torrent-stream

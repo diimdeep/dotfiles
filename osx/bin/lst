@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+#if $(/usr/local/opt/coreutils/libexec/gnubin/ls -s "$@"); then
+gls --color=auto -F --color=always -ltcr $@
+#fi
