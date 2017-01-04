@@ -5,17 +5,17 @@
 	<key>BuildMachineOSBuild</key>
 	<string>12F45</string>
 	<key>CFBundleDisplayName</key>
-	<string>Google Chrome Profile</string>
+	<string>Yandex Profile</string>
 	<key>CFBundleExecutable</key>
 	<string>launcher.sh</string>
 	<key>CFBundleIconFile</key>
 	<string>app.icns</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.google.ChromeProfile</string>
+	<string>com.yandex.YandexProfile</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>ChromeProfile</string>
+	<string>YandexProfile</string>
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleSignature</key>
